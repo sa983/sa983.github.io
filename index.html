@@ -41,16 +41,37 @@
             z-index: 1000;
             padding: 30px 0;
             transition: background-color 0.3s ease;
+            background-image: url('https://dl.dropboxusercontent.com/scl/fi/4kqadwdkcum31tuqwwibb/footer.png?rlkey=spgca16uturns6h2ujgpn16vo');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            transition: background 0.3s ease;
         }
 
         body.dark-mode header {
             background-color: #1a1a1a;
         }
 
+        body.dark-mode header::before {
+            background: rgba(26, 26, 26, 0.9);
+        }
+
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .logo {
@@ -434,21 +455,21 @@
             right: 10px;
         }
 
-        /* Footer Section */
-        footer {
+        /* Header Section with Footer Image */
+        .header-image-section {
             position: relative;
             height: 400px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,1) 100%);
-            margin-top: 80px;
+            background: linear-gradient(to top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,1) 100%);
+            margin-bottom: 80px;
             overflow: hidden;
             transition: background 0.3s ease;
         }
 
-        body.dark-mode footer {
-            background: linear-gradient(to bottom, rgba(26,26,26,0) 0%, rgba(26,26,26,0.8) 50%, rgba(26,26,26,1) 100%);
+        body.dark-mode .header-image-section {
+            background: linear-gradient(to top, rgba(26,26,26,0) 0%, rgba(26,26,26,0.8) 50%, rgba(26,26,26,1) 100%);
         }
 
-        .footer-image {
+        .header-image {
             position: absolute;
             top: 0;
             left: 0;
@@ -460,19 +481,60 @@
             transition: opacity 0.3s ease;
         }
 
-        body.dark-mode .footer-image {
+        body.dark-mode .header-image {
             opacity: 0.4;
         }
 
-        .footer-content {
+        .header-content {
             position: absolute;
-            bottom: 30px;
+            top: 30px;
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
+            z-index: 1;
+        }
+
+        .header-title {
+            font-size: 3rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .header-title {
+            color: #e0e0e0;
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .header-subtitle {
+            color: #999;
+        }
+        footer {
+            position: relative;
+            height: 100px;
+            background-color: #ffffff;
+            margin-top: 80px;
+            overflow: hidden;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.dark-mode footer {
+            background-color: #1a1a1a;
+        }
+
+        .footer-content {
+            text-align: center;
             color: #666;
             font-size: 0.9rem;
-            z-index: 1;
             transition: color 0.3s ease;
         }
 
@@ -517,7 +579,7 @@
             }
 
             footer {
-                height: 250px;
+                height: 80px;
                 margin-top: 60px;
             }
         }
@@ -633,7 +695,6 @@
 
     <!-- Footer with blended image -->
     <footer>
-        <img src="https://dl.dropboxusercontent.com/scl/fi/4kqadwdkcum31tuqwwibb/footer.png?rlkey=spgca16uturns6h2ujgpn16vo" alt="" class="footer-image">
         <div class="footer-content">
             <p>© 2025 Saatvik Amravathi</p>
         </div>
