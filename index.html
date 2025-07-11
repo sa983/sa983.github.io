@@ -285,7 +285,7 @@
             display: flex;
             flex-direction: column;
             gap: 30px;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -326,112 +326,101 @@
             color: #ccc;
         }
 
+        /* Clean Gallery Design */
         .project-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .gallery-main {
             position: relative;
-            height: 400px;
+            height: 500px;
             background-color: #f8f8f8;
-            margin-bottom: 25px;
+            border-radius: 8px;
+            overflow: hidden;
             transition: background-color 0.3s ease;
         }
 
-        body.dark-mode .project-gallery {
+        body.dark-mode .gallery-main {
             background-color: #2a2a2a;
         }
 
-        .gallery-container {
-            display: flex;
-            transition: transform 0.3s ease;
-            height: 100%;
-        }
-
-        .gallery-slide {
-            min-width: 100%;
-            height: 100%;
-            background-color: #f8f8f8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 0.9rem;
-            text-align: center;
-            padding: 40px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        body.dark-mode .gallery-slide {
-            background-color: #2a2a2a;
-            color: #aaa;
-        }
-
-        .gallery-slide img {
+        .gallery-main img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
-        .gallery-controls {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
+        .gallery-main img.active {
+            opacity: 1;
+        }
+
+        .gallery-thumbnails {
             display: flex;
             gap: 8px;
+            overflow-x: auto;
+            padding: 8px 0;
+            scrollbar-width: thin;
+            scrollbar-color: #ccc transparent;
         }
 
-        .gallery-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
+        .gallery-thumbnails::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .gallery-thumbnails::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .gallery-thumbnails::-webkit-scrollbar-thumb {
             background-color: #ccc;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
+            border-radius: 2px;
         }
 
-        .gallery-dot.active {
-            background-color: #666;
-        }
-
-        body.dark-mode .gallery-dot {
+        body.dark-mode .gallery-thumbnails::-webkit-scrollbar-thumb {
             background-color: #555;
         }
 
-        body.dark-mode .gallery-dot.active {
-            background-color: #999;
-        }
-
-        .gallery-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            color: #666;
-            border: none;
-            width: 30px;
-            height: 30px;
+        .thumbnail {
+            min-width: 70px;
+            height: 50px;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            overflow: hidden;
             cursor: pointer;
-            font-size: 18px;
-            font-family: 'EB Garamond', serif;
-            transition: color 0.2s ease;
+            opacity: 0.6;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            border: 1.5px solid transparent;
         }
 
-        .gallery-nav:hover {
-            color: #1a1a1a;
+        body.dark-mode .thumbnail {
+            background-color: #333;
         }
 
-        body.dark-mode .gallery-nav {
-            color: #999;
+        .thumbnail:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
         }
 
-        body.dark-mode .gallery-nav:hover {
-            color: #e0e0e0;
+        .thumbnail.active {
+            opacity: 1;
+            border-color: #1a1a1a;
         }
 
-        .gallery-nav.prev {
-            left: 10px;
+        body.dark-mode .thumbnail.active {
+            border-color: #e0e0e0;
         }
 
-        .gallery-nav.next {
-            right: 10px;
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* Footer Section */
@@ -512,8 +501,13 @@
                 gap: 60px;
             }
 
-            .project-gallery {
-                height: 250px;
+            .gallery-main {
+                height: 300px;
+            }
+
+            .thumbnail {
+                min-width: 60px;
+                height: 42px;
             }
 
             footer {
@@ -594,31 +588,29 @@
                                 <div class="project-meta">R • ggplot2 • sf • tidycensus</div>
                             </div>
                             <div class="project-gallery">
-                                <div class="gallery-container">
-                                    <div class="gallery-slide">
+                                <div class="gallery-main">
+                                    <img src="https://dl.dropboxusercontent.com/scl/fi/v2rsoi116c90xim82wknh/dissimilarity_income.png?rlkey=e17x4uba9uirrz1nx0ckvvm5m" alt="Racial Segregation on Income" class="active">
+                                    <img src="https://dl.dropboxusercontent.com/scl/fi/bjuhouk5a68prll9yydxr/buffalo-dissimilarity-index.png?rlkey=bctlkf66bvm8lt0j4ums0cnj5" alt="Buffalo Dissimilarity Index Map">
+                                    <img src="https://dl.dropboxusercontent.com/scl/fi/j4f2e9qmo4i7q67edxk2g/rochester-dissimilarity-index.png?rlkey=8t8pww70lpomnp2mrpwtqowwj" alt="Rochester Dissimilarity Index Map">
+                                    <img src="https://dl.dropboxusercontent.com/scl/fi/sfj1ykgadq955fs8mom76/buffalo-entropy-index.png?rlkey=uyhg2d6gsotmyxt2dj2fw5voq" alt="Buffalo Racial Entropy Map">
+                                    <img src="https://dl.dropboxusercontent.com/scl/fi/qx1ure2r5j7zy0g1n7jgt/rochester-entropy-index.png?rlkey=p6bksk0rfxjwexkqadzrn8iq9" alt="Rochester Racial Entropy Map">
+                                </div>
+                                <div class="gallery-thumbnails">
+                                    <div class="thumbnail active" onclick="selectImage(0, 0)">
                                         <img src="https://dl.dropboxusercontent.com/scl/fi/v2rsoi116c90xim82wknh/dissimilarity_income.png?rlkey=e17x4uba9uirrz1nx0ckvvm5m" alt="Racial Segregation on Income">
                                     </div>
-                                    <div class="gallery-slide">
+                                    <div class="thumbnail" onclick="selectImage(0, 1)">
                                         <img src="https://dl.dropboxusercontent.com/scl/fi/bjuhouk5a68prll9yydxr/buffalo-dissimilarity-index.png?rlkey=bctlkf66bvm8lt0j4ums0cnj5" alt="Buffalo Dissimilarity Index Map">
                                     </div>
-                                    <div class="gallery-slide">
+                                    <div class="thumbnail" onclick="selectImage(0, 2)">
                                         <img src="https://dl.dropboxusercontent.com/scl/fi/j4f2e9qmo4i7q67edxk2g/rochester-dissimilarity-index.png?rlkey=8t8pww70lpomnp2mrpwtqowwj" alt="Rochester Dissimilarity Index Map">
                                     </div>
-                                    <div class="gallery-slide">
+                                    <div class="thumbnail" onclick="selectImage(0, 3)">
                                         <img src="https://dl.dropboxusercontent.com/scl/fi/sfj1ykgadq955fs8mom76/buffalo-entropy-index.png?rlkey=uyhg2d6gsotmyxt2dj2fw5voq" alt="Buffalo Racial Entropy Map">
                                     </div>
-                                    <div class="gallery-slide">
+                                    <div class="thumbnail" onclick="selectImage(0, 4)">
                                         <img src="https://dl.dropboxusercontent.com/scl/fi/qx1ure2r5j7zy0g1n7jgt/rochester-entropy-index.png?rlkey=p6bksk0rfxjwexkqadzrn8iq9" alt="Rochester Racial Entropy Map">
                                     </div>
-                                </div>
-                                <button class="gallery-nav prev" onclick="changeSlide(0, -1)">‹</button>
-                                <button class="gallery-nav next" onclick="changeSlide(0, 1)">›</button>
-                                <div class="gallery-controls">
-                                    <div class="gallery-dot active" onclick="setSlide(0, 0)"></div>
-                                    <div class="gallery-dot" onclick="setSlide(0, 1)"></div>
-                                    <div class="gallery-dot" onclick="setSlide(0, 2)"></div>
-                                    <div class="gallery-dot" onclick="setSlide(0, 3)"></div>
-                                    <div class="gallery-dot" onclick="setSlide(0, 4)"></div>
                                 </div>
                             </div>
                             <div class="project-description">
@@ -657,41 +649,33 @@
         });
 
         // Gallery functionality
-        const galleries = document.querySelectorAll('.project-gallery');
-        const currentSlides = Array(galleries.length).fill(0);
-
-        function changeSlide(galleryIndex, direction) {
+        function selectImage(galleryIndex, imageIndex) {
+            const galleries = document.querySelectorAll('.project-gallery');
             const gallery = galleries[galleryIndex];
-            const container = gallery.querySelector('.gallery-container');
-            const slides = gallery.querySelectorAll('.gallery-slide');
-            const dots = gallery.querySelectorAll('.gallery-dot');
             
-            currentSlides[galleryIndex] += direction;
+            // Update main images
+            const mainImages = gallery.querySelectorAll('.gallery-main img');
+            mainImages.forEach((img, index) => {
+                img.classList.toggle('active', index === imageIndex);
+            });
             
-            if (currentSlides[galleryIndex] < 0) {
-                currentSlides[galleryIndex] = slides.length - 1;
-            } else if (currentSlides[galleryIndex] >= slides.length) {
-                currentSlides[galleryIndex] = 0;
+            // Update thumbnails
+            const thumbnails = gallery.querySelectorAll('.thumbnail');
+            thumbnails.forEach((thumb, index) => {
+                thumb.classList.toggle('active', index === imageIndex);
+            });
+            
+            // Scroll thumbnail into view if needed
+            const activeThumbnail = thumbnails[imageIndex];
+            const thumbnailContainer = gallery.querySelector('.gallery-thumbnails');
+            const containerRect = thumbnailContainer.getBoundingClientRect();
+            const thumbRect = activeThumbnail.getBoundingClientRect();
+            
+            if (thumbRect.left < containerRect.left) {
+                thumbnailContainer.scrollLeft -= containerRect.left - thumbRect.left + 8;
+            } else if (thumbRect.right > containerRect.right) {
+                thumbnailContainer.scrollLeft += thumbRect.right - containerRect.right + 8;
             }
-            
-            container.style.transform = `translateX(-${currentSlides[galleryIndex] * 100}%)`;
-            
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlides[galleryIndex]);
-            });
-        }
-
-        function setSlide(galleryIndex, slideIndex) {
-            const gallery = galleries[galleryIndex];
-            const container = gallery.querySelector('.gallery-container');
-            const dots = gallery.querySelectorAll('.gallery-dot');
-            
-            currentSlides[galleryIndex] = slideIndex;
-            container.style.transform = `translateX(-${slideIndex * 100}%)`;
-            
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === slideIndex);
-            });
         }
 
         // Theme toggle functionality
