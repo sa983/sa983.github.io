@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Research Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'EB Garamond', serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #ffffff;
+            font-size: 18px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            color: #e0e0e0;
+            background-color: #1a1a1a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header and Navigation */
+        header {
+            background-color: #ffffff;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 30px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode header {
+            background-color: #1a1a1a;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .logo {
+            color: #e0e0e0;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-tab {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'EB Garamond', serif;
+            color: #666;
+            transition: color 0.2s ease;
+            font-weight: 400;
+        }
+
+        .nav-tab:hover,
+        .nav-tab.active {
+            color: #1a1a1a;
+        }
+
+        body.dark-mode .nav-tab {
+            color: #999;
+        }
+
+        body.dark-mode .nav-tab:hover,
+        body.dark-mode .nav-tab.active {
+            color: #e0e0e0;
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            position: relative;
+            width: 50px;
+            height: 25px;
+            background-color: #ccc;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 20px;
+        }
+
+        .theme-toggle.active {
+            background-color: #666;
+        }
+
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            width: 21px;
+            height: 21px;
+            border-radius: 50%;
+            background-color: white;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle.active::after {
+            transform: translateX(25px);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 120px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* About Section - Sidebar Layout */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 80px;
+            min-height: calc(100vh - 120px);
+            padding: 40px 0;
+        }
+
+        .sidebar {
+            padding-top: 20px;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 30px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .profile-name h1 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .profile-name h1 {
+            color: #e0e0e0;
+        }
+
+        .profile-title {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 40px;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .profile-title {
+            color: #999;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .social-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .social-link:hover {
+            color: #1a1a1a;
+        }
+
+        body.dark-mode .social-link {
+            color: #999;
+        }
+
+        body.dark-mode .social-link:hover {
+            color: #e0e0e0;
+        }
+
+        .main-content {
+            padding-top: 20px;
+        }
+
+        .main-content h2 {
+            font-size: 2rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 40px;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .main-content h2 {
+            color: #e0e0e0;
+        }
+
+        .main-content p {
+            margin-bottom: 25px;
+            color: #333;
+            font-size: 1rem;
+            line-height: 1.7;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .main-content p {
+            color: #ccc;
+        }
+
+        /* Projects Section */
+        .projects-container {
+            padding: 40px 0;
+        }
+
+        .projects-header {
+            margin-bottom: 60px;
+        }
+
+        .projects-header h2 {
+            font-size: 2rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .projects-header h2 {
+            color: #e0e0e0;
+        }
+
+        .projects-header p {
+            font-size: 1rem;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .projects-header p {
+            color: #999;
+        }
+
+        .projects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            text-align: left;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .project-content h3 {
+            color: #e0e0e0;
+        }
+
+        .project-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            text-align: left;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .project-meta {
+            color: #999;
+        }
+
+        .project-description p {
+            color: #333;
+            line-height: 1.6;
+            font-size: 1rem;
+            text-align: left;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .project-description p {
+            color: #ccc;
+        }
+
+        .project-gallery {
+            position: relative;
+            height: 400px;
+            background-color: #f8f8f8;
+            margin-bottom: 25px;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode .project-gallery {
+            background-color: #2a2a2a;
+        }
+
+        .gallery-container {
+            display: flex;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            height: 100%;
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 40px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode .gallery-slide {
+            background-color: #2a2a2a;
+            color: #aaa;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-controls {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .gallery-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .gallery-dot.active {
+            background-color: #666;
+        }
+
+        body.dark-mode .gallery-dot {
+            background-color: #555;
+        }
+
+        body.dark-mode .gallery-dot.active {
+            background-color: #999;
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            color: #666;
+            border: none;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            font-family: 'EB Garamond', serif;
+            transition: color 0.2s ease;
+        }
+
+        .gallery-nav:hover {
+            color: #1a1a1a;
+        }
+
+        body.dark-mode .gallery-nav {
+            color: #999;
+        }
+
+        body.dark-mode .gallery-nav:hover {
+            color: #e0e0e0;
+        }
+
+        .gallery-nav.prev {
+            left: 10px;
+        }
+
+        .gallery-nav.next {
+            right: 10px;
+        }
+
+        /* Mobile Responsive */
+                    @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-tabs {
+                gap: 30px;
+            }
+
+            .about-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .sidebar {
+                text-align: center;
+            }
+
+            .profile-photo {
+                margin: 0 auto 30px;
+            }
+
+            .projects-grid {
+                gap: 60px;
+            }
+
+            .project-gallery {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">Your Name</div>
+                <div class="nav-tabs">
+                    <button class="nav-tab active" data-tab="about">About</button>
+                    <button class="nav-tab" data-tab="projects">Projects</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- About Tab -->
+        <div class="tab-content active" id="about">
+            <div class="container">
+                <div class="about-layout">
+                    <div class="sidebar">
+                        <div class="profile-photo">
+                            <img src="https://dl.dropboxusercontent.com/s/YOUR_DROPBOX_KEY/profile-photo.jpg" alt="Your Name" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        </div>
+                        <div class="profile-name">
+                            <h1>Your Name</h1>
+                        </div>
+                        <div class="profile-title">
+                            Data Visualization Researcher
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="#" class="social-link">your.email@institution.edu</a>
+                            <a href="#" class="social-link">GitHub</a>
+                            <a href="#" class="social-link">Twitter</a>
+                            <a href="#" class="social-link">LinkedIn</a>
+                        </div>
+                    </div>
+
+                    <div class="main-content">
+                        <h2>About</h2>
+                        <p>I am a data visualization researcher specializing in the development of compelling maps and statistical graphics using R and related computational tools.</p>
+                        
+                        <p>My research focuses on the intersection of statistical methodology, cartographic design, and human-computer interaction. I am particularly interested in how visualization techniques can be employed to reveal patterns in complex datasets, with applications spanning demographic analysis, environmental monitoring, and urban planning.</p>
+                        
+                        <p>I hold extensive experience in geospatial analysis, having worked with large-scale census data, satellite imagery, and temporal datasets. My methodological approach combines rigorous statistical analysis with principles of effective visual communication.</p>
+                        
+                        <p>My work has been published in peer-reviewed journals and presented at international conferences. I am committed to reproducible research practices and open science, making my code and methodologies available to the broader research community.</p>
+                        
+                        <p>Currently, I am exploring novel approaches to interactive visualization and the integration of machine learning techniques with traditional cartographic methods.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Tab -->
+        <div class="tab-content" id="projects">
+            <div class="container">
+                <div class="projects-container">
+                    <div class="projects-header">
+                        <h2>Projects</h2>
+                        <p>Selected works in data visualization and spatial analysis</p>
+                    </div>
+                    
+                    <div class="projects-grid">
+                        <!-- Project 1 -->
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3>Urban Demographics Mapping</h3>
+                                <div class="project-meta">R • ggplot2 • sf • leaflet</div>
+                            </div>
+                            <div class="project-gallery">
+                                <div class="gallery-container">
+                                    <div class="gallery-slide">
+                                        <img src="https://dl.dropboxusercontent.com/s/YOUR_DROPBOX_KEY/urban-demo-1.png" alt="Population Density Analysis">
+                                    </div>
+                                    <div class="gallery-slide">
+                                        <img src="https://dl.dropboxusercontent.com/s/YOUR_DROPBOX_KEY/urban-demo-2.png" alt="Age Structure Visualization">
+                                    </div>
+                                    <div class="gallery-slide">
+                                        <img src="https://dl.dropboxusercontent.com/s/YOUR_DROPBOX_KEY/urban-demo-3.png" alt="Temporal Change Analysis">
+                                    </div>
+                                </div>
+                                <button class="gallery-nav prev" onclick="changeSlide(0, -1)">‹</button>
+                                <button class="gallery-nav next" onclick="changeSlide(0, 1)">›</button>
+                                <div class="gallery-controls">
+                                    <div class="gallery-dot active" onclick="setSlide(0, 0)"></div>
+                                    <div class="gallery-dot" onclick="setSlide(0, 1)"></div>
+                                    <div class="gallery-dot" onclick="setSlide(0, 2)"></div>
+                                </div>
+                            </div>
+                            <div class="project-description">
+                                <p>This project examines demographic patterns across urban environments using American Community Survey data. Employing advanced cartographic techniques, the analysis reveals spatial clustering of socioeconomic indicators and their temporal evolution. The methodology integrates statistical modeling with geographic information systems to produce publication-quality visualizations suitable for academic and policy applications.</p>
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3>Environmental Monitoring</h3>
+                                <div class="project-meta">R • tidyverse • raster • satellite imagery</div>
+                            </div>
+                            <div class="project-gallery">
+                                <div class="gallery-container">
+                                    <div class="gallery-slide">
+                                        <img src="https://dl.dropboxusercontent.com/s/YOUR_DROPBOX_KEY/env-monitor-1.png" alt="Climate Variable Mapping">
+                                    </div>
+                                    <div class="gallery-slide">
+                                        <img src="https://dl.dropboxusercontent.com/s/YOUR_DROPBOX_KEY/env-monitor-2.png" alt="Vegetation Index Analysis">
+                                    </div>
+                                </div>
+                                <button class="gallery-nav prev" onclick="changeSlide(1, -1)">‹</button>
+                                <button class="gallery-nav next" onclick="changeSlide(1, 1)">›</button>
+                                <div class="gallery-controls">
+                                    <div class="gallery-dot active" onclick="setSlide(1, 0)"></div>
+                                    <div class="gallery-dot" onclick="setSlide(1, 1)"></div>
+                                </div>
+                            </div>
+                            <div class="project-description">
+                                <p>A comprehensive analysis of environmental variables using satellite imagery and ground-based measurements. This research employs advanced statistical techniques to identify long-term trends in climate data. The visualization framework developed for this project has been adopted by environmental monitoring agencies for operational use.</p>
+                            </div>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3>Transportation Networks</h3>
+                                <div class="project-meta">R • igraph • network analysis • graph theory</div>
+                            </div>
+                            <div class="project-gallery">
+                                <div class="gallery-container">
+                                    <div class="gallery-slide">
+                                        <img src="https://dl.dropboxusercontent.com/s/YOUR_DROPBOX_KEY/transport-1.png" alt="Network Topology Analysis">
+                                    </div>
+                                    <div class="gallery-slide">
+                                        <img src="https://dl.dropboxusercontent.com/s/YOUR_DROPBOX_KEY/transport-2.png" alt="Flow Pattern Mapping">
+                                    </div>
+                                </div>
+                                <button class="gallery-nav prev" onclick="changeSlide(2, -1)">‹</button>
+                                <button class="gallery-nav next" onclick="changeSlide(2, 1)">›</button>
+                                <div class="gallery-controls">
+                                    <div class="gallery-dot active" onclick="setSlide(2, 0)"></div>
+                                    <div class="gallery-dot" onclick="setSlide(2, 1)"></div>
+                                </div>
+                            </div>
+                            <div class="project-description">
+                                <p>This study applies network analysis techniques to urban transportation systems, examining connectivity patterns and identifying critical infrastructure nodes. The research combines graph theory with geospatial analysis to provide insights for transportation planning and resilience assessment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Tab switching functionality
+        const tabs = document.querySelectorAll('.nav-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                tab.classList.add('active');
+                
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Gallery functionality
+        const galleries = document.querySelectorAll('.project-gallery');
+        const currentSlides = Array(galleries.length).fill(0);
+
+        function changeSlide(galleryIndex, direction) {
+            const gallery = galleries[galleryIndex];
+            const container = gallery.querySelector('.gallery-container');
+            const slides = gallery.querySelectorAll('.gallery-slide');
+            const dots = gallery.querySelectorAll('.gallery-dot');
+            
+            currentSlides[galleryIndex] += direction;
+            
+            if (currentSlides[galleryIndex] < 0) {
+                currentSlides[galleryIndex] = slides.length - 1;
+            } else if (currentSlides[galleryIndex] >= slides.length) {
+                currentSlides[galleryIndex] = 0;
+            }
+            
+            container.style.transform = `translateX(-${currentSlides[galleryIndex] * 100}%)`;
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlides[galleryIndex]);
+            });
+        }
+
+        function setSlide(galleryIndex, slideIndex) {
+            const gallery = galleries[galleryIndex];
+            const container = gallery.querySelector('.gallery-container');
+            const dots = gallery.querySelectorAll('.gallery-dot');
+            
+            currentSlides[galleryIndex] = slideIndex;
+            container.style.transform = `translateX(-${slideIndex * 100}%)`;
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === slideIndex);
+            });
+        }
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const toggle = document.querySelector('.theme-toggle');
+            
+            body.classList.toggle('dark-mode');
+            toggle.classList.toggle('active');
+            
+            // Save theme preference
+            const isDark = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+        }
+
+        // Load saved theme preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('darkMode');
+            if (savedTheme === 'true') {
+                document.body.classList.add('dark-mode');
+                document.querySelector('.theme-toggle').classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
