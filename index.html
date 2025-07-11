@@ -34,10 +34,7 @@
 
         /* Header and Navigation */
         header {
-            background-image: url('https://dl.dropboxusercontent.com/scl/fi/4kqadwdkcum31tuqwwibb/footer.png?rlkey=spgca16uturns6h2ujgpn16vo');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-color: #ffffff;
             position: fixed;
             width: 100%;
             top: 0;
@@ -46,27 +43,14 @@
             transition: background-color 0.3s ease;
         }
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.9);
-            transition: background 0.3s ease;
-        }
-
-        body.dark-mode header::before {
-            background: rgba(26, 26, 26, 0.9);
+        body.dark-mode header {
+            background-color: #1a1a1a;
         }
 
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            z-index: 1;
         }
 
         .logo {
@@ -143,33 +127,6 @@
             transform: translateX(25px);
         }
 
-        /* Header Image Banner */
-        .header-banner {
-            position: relative;
-            height: 400px;
-            background-image: url('https://dl.dropboxusercontent.com/scl/fi/4kqadwdkcum31tuqwwibb/footer.png?rlkey=spgca16uturns6h2ujgpn16vo');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin-top: 90px;
-            overflow: hidden;
-        }
-
-        .header-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.6) 70%, rgba(255,255,255,1) 100%);
-            transition: background 0.3s ease;
-        }
-
-        body.dark-mode .header-banner::before {
-            background: linear-gradient(to bottom, rgba(26,26,26,0.3) 0%, rgba(26,26,26,0.6) 70%, rgba(26,26,26,1) 100%);
-        }
-
         /* Main Content */
         main {
             margin-top: 120px;
@@ -190,7 +147,6 @@
             gap: 80px;
             min-height: calc(100vh - 120px);
             padding: 40px 0;
-            margin-top: 0;
         }
 
         .sidebar {
@@ -478,21 +434,21 @@
             right: 10px;
         }
 
-        /* Header Section with Footer Image */
-        .header-image-section {
+        /* Footer Section */
+        footer {
             position: relative;
             height: 400px;
-            background: linear-gradient(to top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,1) 100%);
-            margin-bottom: 80px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,1) 100%);
+            margin-top: 80px;
             overflow: hidden;
             transition: background 0.3s ease;
         }
 
-        body.dark-mode .header-image-section {
-            background: linear-gradient(to top, rgba(26,26,26,0) 0%, rgba(26,26,26,0.8) 50%, rgba(26,26,26,1) 100%);
+        body.dark-mode footer {
+            background: linear-gradient(to bottom, rgba(26,26,26,0) 0%, rgba(26,26,26,0.8) 50%, rgba(26,26,26,1) 100%);
         }
 
-        .header-image {
+        .footer-image {
             position: absolute;
             top: 0;
             left: 0;
@@ -504,60 +460,19 @@
             transition: opacity 0.3s ease;
         }
 
-        body.dark-mode .header-image {
+        body.dark-mode .footer-image {
             opacity: 0.4;
         }
 
-        .header-content {
+        .footer-content {
             position: absolute;
-            top: 30px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
-            z-index: 1;
-        }
-
-        .header-title {
-            font-size: 3rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 10px;
-            transition: color 0.3s ease;
-        }
-
-        body.dark-mode .header-title {
-            color: #e0e0e0;
-        }
-
-        .header-subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            transition: color 0.3s ease;
-        }
-
-        body.dark-mode .header-subtitle {
-            color: #999;
-        }
-        footer {
-            position: relative;
-            height: 100px;
-            background-color: #ffffff;
-            margin-top: 80px;
-            overflow: hidden;
-            transition: background-color 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        body.dark-mode footer {
-            background-color: #1a1a1a;
-        }
-
-        .footer-content {
-            text-align: center;
             color: #666;
             font-size: 0.9rem;
+            z-index: 1;
             transition: color 0.3s ease;
         }
 
@@ -601,18 +516,8 @@
                 height: 250px;
             }
 
-            .header-banner {
-                height: 250px;
-                margin-top: 70px;
-            }
-
-            .header-banner {
-                height: 250px;
-                margin-top: 70px;
-            }
-
             footer {
-                height: 80px;
+                height: 250px;
                 margin-top: 60px;
             }
         }
@@ -728,6 +633,7 @@
 
     <!-- Footer with blended image -->
     <footer>
+        <img src="https://dl.dropboxusercontent.com/scl/fi/4kqadwdkcum31tuqwwibb/footer.png?rlkey=spgca16uturns6h2ujgpn16vo" alt="" class="footer-image">
         <div class="footer-content">
             <p>© 2025 Saatvik Amravathi</p>
         </div>
